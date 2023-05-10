@@ -32,8 +32,9 @@ function ul() {
 }
 
 
-function carregar() {
-    for(pokemon of passagem) {
+function carregar(iteracao) {
+    let article = document.createElement('article')
+    for(pokemon of iteracao) {
         let xhttpPoke = new XMLHttpRequest
         xhttpPoke.open("GET", pokemon.url, false)    
         xhttpPoke.send()
@@ -65,25 +66,30 @@ function carregar() {
 
         let img = document.createElement('img')
         img.setAttribute("src", requisicao2.sprites.front_default)
-
         section.appendChild(div)
         div.appendChild(sectionInt)
         sectionInt.appendChild(h2)
         sectionInt.appendChild(ul)
         div.appendChild(sectionImg)
         sectionImg.appendChild(img)
-        document.body.appendChild(section)
+        article.appendChild(section)
     }
+    let get = document.querySelector('article')
+    let body = document.querySelector('body')
+    // console.log(get)
+    if(get != null) {
+        body.removeChild(get)
+    }
+    document.body.appendChild(article)
 }
 
-document.addEventListener('keypress', () => {
+document.addEventListener('keyup', () => {
     let search = document.querySelector('.search')
     let filtro = requisicao.filter((res) => {
         return !(res.name.indexOf(search.value.toLowerCase()))
     })
-    console.log(search.value)
+    // console.log(search.value)
     passagem = filtro
-    console.log(passagem)
-    carregar()
+    carregar(passagem)
 })
-carregar()
+carregar(passagem)
