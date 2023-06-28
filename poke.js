@@ -3,6 +3,7 @@ xhttp.open("GET",'https://pokeapi.co/api/v2/pokemon?&limit=100', false)
 xhttp.send()
 const requisicao = JSON.parse(xhttp.responseText).results
 let passagem = requisicao
+const container = document.querySelector('.container')
 // console.log(requisicao)
 
 function section(classe){
@@ -72,7 +73,7 @@ function carregar() {
         sectionInt.appendChild(ul)
         div.appendChild(sectionImg)
         sectionImg.appendChild(img)
-        document.body.appendChild(section)
+        container.appendChild(section)
     }
 }
 
